@@ -13,11 +13,11 @@ const Header = () => {
       </View>
       <View style={styles.bottomHeader}>
         <View style={styles.bottomLeft}>
-          <HambergerMenu size="28" color={AppColors.SECONDARY} />
+          <HambergerMenu size="28" color={AppColors.BLACK} />
         </View>
         <View style={styles.bottomRight}>
-          <SearchNormal1 size="28" color={AppColors.SECONDARY} />
-          <More size="28" color={AppColors.SECONDARY} />
+          <SearchNormal1 size="28" color={AppColors.BLACK} />
+          <More size="28" color={AppColors.BLACK} />
         </View>
       </View>
     </View>

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     right: 20,
     bottom: 20,
     backgroundColor: AppColors.PRIMARY,
-    borderRadius: 1000,
+    borderRadius: screenWidth * 0.5,
     width: screenWidth * 0.2,
     height: screenWidth * 0.2,
   },
