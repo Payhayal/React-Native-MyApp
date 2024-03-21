@@ -6,8 +6,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import FloatActionBtn from '../../components/ui/floatActionBtn';
 import {mockData} from '../../utils/mockData';
 import NoteCard from '../../components/mynotes/noteCard';
+import {ADDNOTE} from '../../utils/routes';
 
-const MyNotes = () => {
+const MyNotes = ({navigation}) => {
   return (
     <SafeAreaView style={screenStyle.container}>
       <View style={screenStyle.container}>
@@ -17,7 +18,7 @@ const MyNotes = () => {
           renderItem={({item}) => <NoteCard item={item} />}
           keyExtractor={item => item.id}
         />
-        <FloatActionBtn />
+        <FloatActionBtn onPress={() => navigation.navigate(ADDNOTE)} />
       </View>
     </SafeAreaView>
   );

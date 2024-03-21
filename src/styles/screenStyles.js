@@ -5,6 +5,7 @@ const screenStyle = StyleSheet.create({
   container: {
     backgroundColor: AppColors.SCREENBACKGROUNDCOLOR,
     flex: 1,
+    padding: 5,
   },
 });
 
