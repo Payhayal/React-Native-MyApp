@@ -4,15 +4,30 @@ import MyNotes from '../screens/myNotes';
 import AddNote from '../screens/addNote';
 import NoteDetail from '../screens/noteDetail';
 import {ADDNOTE, MYNOTES, NOTEDETAIL} from '../utils/routes';
+import {AppColors} from '../theme/colors';
+import HeaderRight from '../components/ui/headerRight';
 
 const Stack = createNativeStackNavigator();
 const RootNavigator = () => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerTintColor: AppColors.BLACK,
+      }}
       initialRouteName={MYNOTES}>
-      <Stack.Screen name={MYNOTES} component={MyNotes} />
-      <Stack.Screen name={ADDNOTE} component={AddNote} />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name={MYNOTES}
+        component={MyNotes}
+      />
+      <Stack.Screen
+        options={{
+          headerRight: props => <HeaderRight />,
+        }}
+        name={ADDNOTE}
+        component={AddNote}
+      />
       <Stack.Screen name={NOTEDETAIL} component={NoteDetail} />
     </Stack.Navigator>
   );
