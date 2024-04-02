@@ -6,5 +6,6 @@ const AppColors = {
   SCREENBACKGROUNDCOLOR: '#e3e3e3',
   GREEN: '#37d67a',
   BLACK: '#000',
+  RED: '#f47373',
 };
 export {AppColors};
