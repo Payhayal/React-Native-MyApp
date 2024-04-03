@@ -5,10 +5,13 @@ import Button from '../../components/ui/button';
 import EditButtons from '../../components/addNote/editButtons';
 import MyContext from '../../context';
 import {useNavigation} from '@react-navigation/native';
+import {getRandomNumber} from '../../utils/functions';
 
 const NoteDetail = ({route}) => {
   const navigation = useNavigation();
   const {note} = route?.params;
+  const [title, setTitle] = useState(note?.title);
+  const [description, setDescription] = useState(note?.description);
   const [selectedStyle, setSelectedStyle] = useState(styles.default);
   const {updateNote} = useContext(MyContext);
 
@@ -38,18 +41,15 @@ const NoteDetail = ({route}) => {
         break;
     }
   };
-  useEffect(() => {
-    // return () => {
-    //   updateNote(note.id, note);
-    // };
-  }, [updateNote]);
+  useEffect(() => {}, [updateNote]);
 
   const saveChanges = () => {
     const form = {
-      id: note.id,
-      title: note.title,
-      description: note.description,
+      id: getRandomNumber(1, 100),
+      title: title,
+      description: description,
       date: new Date().toLocaleTimeString(),
+      read: false,
     };
     updateNote(note.id, form);
     navigation.goBack();
@@ -65,21 +65,23 @@ const NoteDetail = ({route}) => {
           <Text style={styles.text}>Title :</Text>
           <TextInput
             placeholder="Title"
-            style={[styles.input, selectedStyle]}
-            value={note?.title}
+            style={[styles.inputTitle, selectedStyle]}
+            value={title}
+            onChangeText={text => setTitle(text)}
           />
           <Text style={styles.text}>Description :</Text>
           <TextInput
             placeholder="Description"
-            style={[styles.input, selectedStyle]}
-            value={note?.description}
+            style={[styles.inputDescription, selectedStyle]}
+            value={description}
+            onChangeText={text => setDescription(text)}
           />
-          <Text style={styles.text}>Date :</Text>
+          {/* <Text style={styles.text}>Date :</Text>
           <TextInput
             placeholder="Date"
             style={[styles.input, selectedStyle]}
             value={note?.date}
-          />
+          /> */}
         </View>
         <View>
           <Button onPress={saveChanges} title="Save Changes" />
@@ -97,8 +99,7 @@ const styles = StyleSheet.create({
   info: {
     flex: 1,
   },
-  input: {
-    flex: 1,
+  inputTitle: {
     backgroundColor: AppColors.SCREENBACKGROUNDCOLOR,
     borderWidth: 1,
     padding: 2,
@@ -108,6 +109,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 500,
     color: AppColors.BLACK,
+    height: 80,
+  },
+  inputDescription: {
+    backgroundColor: AppColors.SCREENBACKGROUNDCOLOR,
+    borderWidth: 1,
+    padding: 2,
+    margin: 30,
+    borderRadius: 5,
+    borderColor: AppColors.GRAY,
+    fontSize: 20,
+    fontWeight: 500,
+    color: AppColors.BLACK,
+    height: 100,
   },
   text: {
     fontSize: 20,

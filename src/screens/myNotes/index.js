@@ -11,19 +11,6 @@ import MyContext from '../../context';
 const MyNotes = ({navigation}) => {
   const {notes, setNotes, deleteNote, updateNote} = useContext(MyContext);
 
-  let note2 = {
-    id: 5,
-    title: 'Datsddf Engineer',
-    description: 'This is the fifth description!',
-    date: '15:25 PM',
-  };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setNotes([...notes, note2]);
-  //   }, 2000);
-  // }, []);
-
   return (
     <SafeAreaView style={screenStyle.container}>
       <View style={screenStyle.container}>

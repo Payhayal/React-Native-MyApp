@@ -36,14 +36,14 @@ const Provider = ({children}) => {
   const addNotes = item => {
     if (item) {
       setNotes([...notes, item]);
-      Alert.alert('You saved the note successfully!');
+      Alert.alert('Your note has been successfully saved!');
     }
   };
   const deleteNote = id => {
     if (id) {
       const updateItems = notes.filter(item => item.id !== id);
       setNotes(updateItems);
-      Alert.alert('Your note was deleted successfully!');
+      Alert.alert('Your note has been successfully deleted!');
     } else {
       Alert.alert('There is no such note!');
     }
@@ -61,11 +61,17 @@ const Provider = ({children}) => {
         : note,
     );
     setNotes(updateItems);
-    Alert.alert('Your note was updated successfully!');
+    Alert.alert('Your note has been successfully updated!');
   };
   return (
     <MyContext.Provider
-      value={{notes, setNotes, addNotes, updateNote, deleteNote}}>
+      value={{
+        notes,
+        setNotes,
+        addNotes,
+        updateNote,
+        deleteNote,
+      }}>
       {children}
     </MyContext.Provider>
   );
