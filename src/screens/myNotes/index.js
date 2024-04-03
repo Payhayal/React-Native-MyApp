@@ -82,7 +82,9 @@ const MyNotes = ({navigation}) => {
           )}
           keyExtractor={item => item.id}
         />
-        <FloatActionBtn onPress={() => navigation.navigate(ADDNOTE)} />
+        <FloatActionBtn
+          onPress={() => navigation.navigate(ADDNOTE, {type: 'add'})}
+        />
       </View>
     </SafeAreaView>
   );

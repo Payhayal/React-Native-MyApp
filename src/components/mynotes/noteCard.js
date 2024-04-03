@@ -4,7 +4,7 @@ import {Edit, Trash} from 'iconsax-react-native';
 import {NoteCardStyles} from '../../styles/noteCardStyles';
 import {AppColors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
-import {NOTEDETAIL} from '../../utils/routes';
+import {ADDNOTE, NOTEDETAIL} from '../../utils/routes';
 
 const NoteCard = ({item, deleteItem, updateItem}) => {
   const navigation = useNavigation();
@@ -26,7 +26,9 @@ const NoteCard = ({item, deleteItem, updateItem}) => {
         <Trash size="24" variant="Bold" color={AppColors.RED} />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => updateItem(item)}
+        onPress={() =>
+          navigation.navigate(ADDNOTE, {note: item, type: 'update'})
+        }
         style={NoteCardStyles.trashView}>
         <Edit size="24" variant="Bold" color={AppColors.PRIMARY} />
       </TouchableOpacity>
