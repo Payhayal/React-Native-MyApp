@@ -1,12 +1,16 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TextInput, SafeAreaView} from 'react-native';
 import {AppColors} from '../../theme/colors';
 import Button from '../../components/ui/button';
 import EditButtons from '../../components/addNote/editButtons';
+import MyContext from '../../context';
+import {useNavigation} from '@react-navigation/native';
 
 const NoteDetail = ({route}) => {
+  const navigation = useNavigation();
   const {note} = route?.params;
   const [selectedStyle, setSelectedStyle] = useState(styles.default);
+  const {updateNote} = useContext(MyContext);
 
   const changeText = style => {
     switch (style) {
@@ -33,6 +37,22 @@ const NoteDetail = ({route}) => {
         setSelectedStyle(styles.default);
         break;
     }
+  };
+  useEffect(() => {
+    // return () => {
+    //   updateNote(note.id, note);
+    // };
+  }, [updateNote]);
+
+  const saveChanges = () => {
+    const form = {
+      id: note.id,
+      title: note.title,
+      description: note.description,
+      date: new Date().toLocaleTimeString(),
+    };
+    updateNote(note.id, form);
+    navigation.goBack();
   };
 
   return (
@@ -62,7 +82,7 @@ const NoteDetail = ({route}) => {
           />
         </View>
         <View>
-          <Button title="Save Changes" />
+          <Button onPress={saveChanges} title="Save Changes" />
         </View>
       </View>
     </SafeAreaView>

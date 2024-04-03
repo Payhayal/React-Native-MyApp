@@ -1,39 +1,60 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, View, SafeAreaView, TextInput, Text} from 'react-native';
 import {screenStyle} from '../../styles/screenStyles';
 import Button from '../../components/ui/button';
 import {AppColors} from '../../theme/colors';
 import {getRandomNumber} from '../../utils/functions';
+import MyContext from '../../context';
+import {useNavigation} from '@react-navigation/native';
 
 const AddNote = ({route}) => {
+  const navigation = useNavigation();
+  const {addNotes, updateNote} = useContext(MyContext);
   const {note, type} = route?.params;
   const [title, setTitle] = useState(note?.title);
-  const [addNote, setAddNote] = useState(note?.description);
+  const [description, setDescription] = useState(note?.description);
   const [titleRequired, setTitleRequired] = useState(false);
-  const [addNoteRequired, setAddNoteRequired] = useState(false);
+  const [descriptionRequired, setDescriptionRequired] = useState(false);
 
   const saveNote = () => {
-    if (!title && addNote) {
-      setTitleRequired(true);
-      setAddNoteRequired(false);
-    }
-    if (title && !addNote) {
+    if (title && description) {
       setTitleRequired(false);
-      setAddNoteRequired(true);
-    }
-    if (!title && !addNote) {
-      setTitleRequired(true);
-      setAddNoteRequired(true);
-    }
-    if (title && addNote) {
-      setTitleRequired(false);
-      setAddNoteRequired(false);
+      setDescriptionRequired(false);
       const form = {
         id: getRandomNumber(1, 100),
         title: title,
-        description: addNote,
+        description: description,
+        date: new Date().toLocaleTimeString(),
+        read: false,
+      };
+      addNotes(form);
+      navigation.goBack();
+    }
+    if (!title && description) {
+      setTitleRequired(true);
+      setDescriptionRequired(false);
+    }
+    if (title && !description) {
+      setTitleRequired(false);
+      setDescriptionRequired(true);
+    }
+    if (!title && !description) {
+      setTitleRequired(true);
+      setDescriptionRequired(true);
+    }
+  };
+  const onChangeNote = () => {
+    if (title && description) {
+      setTitleRequired(false);
+      setDescriptionRequired(false);
+      const form = {
+        id: note.id,
+        title: title,
+        description: description,
         date: new Date().toLocaleTimeString(),
       };
+      updateNote(note.id, form);
+      navigation.goBack();
     }
   };
 
@@ -57,10 +78,10 @@ const AddNote = ({route}) => {
           <TextInput
             placeholder="Write your note here..."
             style={styles.input}
-            value={addNote}
-            onChangeText={text => setAddNote(text)}
+            value={description}
+            onChangeText={text => setDescription(text)}
           />
-          {addNoteRequired && (
+          {descriptionRequired && (
             <Text style={styles.validation}>
               Please fill in the note field!
             </Text>
@@ -68,7 +89,7 @@ const AddNote = ({route}) => {
         </View>
         <View>
           <Button
-            onPress={saveNote}
+            onPress={type === 'update' ? onChangeNote : saveNote}
             title={type === 'update' ? 'Update Changes' : 'Save'}
           />
         </View>
