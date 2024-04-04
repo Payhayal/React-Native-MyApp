@@ -34,34 +34,73 @@ const Provider = ({children}) => {
     },
   ]);
   const addNotes = item => {
-    if (item) {
-      setNotes([...notes, item]);
-      Alert.alert('Your note has been successfully saved!');
-    }
+    Alert.alert('Add', `Are you sure you want to add a new note?`, [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Add',
+        onPress: () => {
+          if (item) {
+            setNotes([...notes, item]);
+            Alert.alert('Your note has been successfully added!');
+          }
+        },
+        style: 'destructive',
+      },
+    ]);
   };
   const deleteNote = id => {
-    if (id) {
-      const updateItems = notes.filter(item => item.id !== id);
-      setNotes(updateItems);
-      Alert.alert('Your note has been successfully deleted!');
-    } else {
-      Alert.alert('There is no such note!');
-    }
+    Alert.alert(
+      'Delete',
+      `Are you sure you want to delete the note?`,
+
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          onPress: () => {
+            if (id) {
+              const updateItems = notes.filter(item => item.id !== id);
+              setNotes(updateItems);
+              Alert.alert('Your note has been successfully deleted!');
+            }
+          },
+          style: 'destructive',
+        },
+      ],
+    );
   };
   const updateNote = (id, item) => {
-    const updateItems = notes.map(note =>
-      note.id === id
-        ? {
-            ...note,
-            title: item?.title,
-            description: item.description,
-            read: true,
-            date: new Date().toLocaleTimeString(),
-          }
-        : note,
-    );
-    setNotes(updateItems);
-    Alert.alert('Your note has been successfully updated!');
+    Alert.alert('Update', `Do you want to update the note?`, [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Update',
+        onPress: () => {
+          const updateItems = notes.map(note =>
+            note.id === id
+              ? {
+                  ...note,
+                  title: item?.title,
+                  description: item.description,
+                  read: true,
+                  date: new Date().toLocaleTimeString(),
+                }
+              : note,
+          );
+          setNotes(updateItems);
+          Alert.alert('Your note has been successfully updated!');
+        },
+        style: 'destructive',
+      },
+    ]);
   };
   return (
     <MyContext.Provider
