@@ -34,27 +34,32 @@ const Provider = ({children}) => {
     },
   ]);
   const addNotes = item => {
-    Alert.alert('Add', `Are you sure you want to add a new note?`, [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      {
-        text: 'Add',
-        onPress: () => {
-          if (item) {
-            setNotes([...notes, item]);
-            Alert.alert('Your note has been successfully added!');
-          }
+    Alert.alert(
+      'Add',
+      `Are you sure you want to add a new note named "${item?.title}"?`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
         },
-        style: 'destructive',
-      },
-    ]);
+        {
+          text: 'Add',
+          onPress: () => {
+            if (item) {
+              setNotes([...notes, item]);
+              Alert.alert('Your note has been successfully added!');
+            }
+          },
+          style: 'destructive',
+        },
+      ],
+    );
   };
-  const deleteNote = id => {
+  const deleteNote = (id, item) => {
+    console.log(item);
     Alert.alert(
       'Delete',
-      `Are you sure you want to delete the note?`,
+      `Are you sure you want to delete the note "${item?.title}" ?`,
 
       [
         {
@@ -65,7 +70,7 @@ const Provider = ({children}) => {
           text: 'Delete',
           onPress: () => {
             if (id) {
-              const updateItems = notes.filter(item => item.id !== id);
+              const updateItems = notes.filter(note => note.id !== id);
               setNotes(updateItems);
               Alert.alert('Your note has been successfully deleted!');
             }
@@ -76,31 +81,35 @@ const Provider = ({children}) => {
     );
   };
   const updateNote = (id, item) => {
-    Alert.alert('Update', `Do you want to update the note?`, [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      {
-        text: 'Update',
-        onPress: () => {
-          const updateItems = notes.map(note =>
-            note.id === id
-              ? {
-                  ...note,
-                  title: item?.title,
-                  description: item.description,
-                  read: true,
-                  date: new Date().toLocaleTimeString(),
-                }
-              : note,
-          );
-          setNotes(updateItems);
-          Alert.alert('Your note has been successfully updated!');
+    Alert.alert(
+      'Update',
+      `Do you want to update the note as "${item?.title}"?`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
         },
-        style: 'destructive',
-      },
-    ]);
+        {
+          text: 'Update',
+          onPress: () => {
+            const updateItems = notes.map(note =>
+              note.id === id
+                ? {
+                    ...note,
+                    title: item?.title,
+                    description: item.description,
+                    read: true,
+                    date: new Date().toLocaleTimeString(),
+                  }
+                : note,
+            );
+            setNotes(updateItems);
+            Alert.alert('Your note has been successfully updated!');
+          },
+          style: 'destructive',
+        },
+      ],
+    );
   };
   return (
     <MyContext.Provider
