@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react';
-import {StyleSheet, View, SafeAreaView, TextInput, Text} from 'react-native';
+import {View, SafeAreaView, TextInput, Text} from 'react-native';
 import {screenStyle} from '../../styles/screenStyles';
 import Button from '../../components/ui/button';
-import {AppColors} from '../../theme/colors';
 import {getRandomNumber} from '../../utils/functions';
 import MyContext from '../../context';
 import {useNavigation} from '@react-navigation/native';
+import {AddNoteStyles} from '../../styles/addNoteStyles';
 
 const AddNote = ({route}) => {
   const navigation = useNavigation();
@@ -61,28 +61,28 @@ const AddNote = ({route}) => {
   return (
     <SafeAreaView style={screenStyle.container}>
       <View style={screenStyle.container}>
-        <View style={styles.info}>
-          <Text style={styles.text}>Title :</Text>
+        <View style={AddNoteStyles.info}>
+          <Text style={AddNoteStyles.text}>Title :</Text>
           <TextInput
             placeholder="Please, write your title here..."
-            style={styles.title}
+            style={AddNoteStyles.title}
             value={title}
             onChangeText={text => setTitle(text)}
           />
           {titleRequired && (
-            <Text style={styles.validation}>
+            <Text style={AddNoteStyles.validation}>
               Please fill in the title field!
             </Text>
           )}
-          <Text style={styles.text}>Note :</Text>
+          <Text style={AddNoteStyles.text}>Note :</Text>
           <TextInput
             placeholder="Write your note here..."
-            style={styles.input}
+            style={AddNoteStyles.input}
             value={description}
             onChangeText={text => setDescription(text)}
           />
           {descriptionRequired && (
-            <Text style={styles.validation}>
+            <Text style={AddNoteStyles.validation}>
               Please fill in the note field!
             </Text>
           )}
@@ -97,40 +97,5 @@ const AddNote = ({route}) => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  info: {
-    flex: 1,
-    padding: 10,
-  },
-  title: {
-    backgroundColor: AppColors.WHITE,
-    borderWidth: 1,
-    padding: 5,
-    margin: 8,
-    borderRadius: 10,
-    borderColor: AppColors.GRAY,
-    height: 50,
-  },
-  input: {
-    backgroundColor: AppColors.WHITE,
-    borderWidth: 1,
-    padding: 5,
-    margin: 8,
-    borderRadius: 10,
-    borderColor: AppColors.GRAY,
-    height: 100,
-  },
-  text: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: AppColors.RED,
-    marginVertical: 15,
-  },
-  validation: {
-    color: AppColors.RED,
-    fontWeight: 'bold',
-    marginVertical: 15,
-  },
-});
 
 export default AddNote;
