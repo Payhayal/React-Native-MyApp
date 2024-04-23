@@ -22,12 +22,15 @@ const RootNavigator = () => {
         component={MyNotes}
       />
       <Stack.Screen
-        options={{
+        initialParams={{type: 'type'}}
+        options={({route}) => ({
           headerRight: props => <HeaderRight />,
-        }}
+          title: route.params.type === 'add' ? 'Add Note' : 'Update Note',
+        })}
         name={ADDNOTE}
         component={AddNote}
       />
+
       <Stack.Screen name={NOTEDETAIL} component={NoteDetail} />
     </Stack.Navigator>
   );

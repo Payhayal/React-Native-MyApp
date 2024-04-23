@@ -1,38 +1,40 @@
 import React, {useState} from 'react';
 import {Alert} from 'react-native';
 import MyContext from '.';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Provider = ({children}) => {
   const [notes, setNotes] = useState([
     {
       id: 1,
-      title: 'Design Engineer',
-      description: 'This is the first description!',
+      title: 'Note 1',
+      description: 'This is the first note!',
       date: new Date().toLocaleTimeString(),
       read: false,
     },
     {
       id: 2,
-      title: 'Software Engineer',
-      description: 'This is the second description!',
+      title: 'Note 2',
+      description: 'This is the second note!',
       date: new Date().toLocaleTimeString(),
       read: false,
     },
     {
       id: 3,
-      title: 'Content Writer',
-      description: 'This is the third description!',
+      title: 'Note 3',
+      description: 'This is the third note!',
       date: new Date().toLocaleTimeString(),
       read: false,
     },
     {
       id: 4,
-      title: 'Data Engineer',
-      description: 'This is the fourth description!',
+      title: 'Note 4',
+      description: 'This is the fourth note!',
       date: new Date().toLocaleTimeString(),
       read: false,
     },
   ]);
+
   const addNotes = item => {
     Alert.alert(
       'Add',
@@ -44,19 +46,22 @@ const Provider = ({children}) => {
         },
         {
           text: 'Add',
-          onPress: () => {
+          onPress: async () => {
             if (item) {
               setNotes([...notes, item]);
+              await AsyncStorage.getItem('notes').then(() =>
+                setNotes([...notes, item]),
+              );
               Alert.alert('Your note has been successfully added!');
             }
           },
+
           style: 'destructive',
         },
       ],
     );
   };
   const deleteNote = (id, item) => {
-    console.log(item);
     Alert.alert(
       'Delete',
       `Are you sure you want to delete the note "${item?.title}" ?`,
@@ -68,13 +73,16 @@ const Provider = ({children}) => {
         },
         {
           text: 'Delete',
-          onPress: () => {
+          onPress: async () => {
             if (id) {
-              const updateItems = notes.filter(note => note.id !== id);
-              setNotes(updateItems);
+              const deleteItems = notes.filter(note => note.id !== id);
+              await AsyncStorage.removeItem('notes').then(() =>
+                setNotes(deleteItems),
+              );
               Alert.alert('Your note has been successfully deleted!');
             }
           },
+
           style: 'destructive',
         },
       ],
@@ -91,7 +99,7 @@ const Provider = ({children}) => {
         },
         {
           text: 'Update',
-          onPress: () => {
+          onPress: async () => {
             const updateItems = notes.map(note =>
               note.id === id
                 ? {
@@ -103,7 +111,10 @@ const Provider = ({children}) => {
                   }
                 : note,
             );
-            setNotes(updateItems);
+            await AsyncStorage.setItem(
+              'notes',
+              JSON.stringify(updateItems),
+            ).then(() => setNotes(updateItems));
             Alert.alert('Your note has been successfully updated!');
           },
           style: 'destructive',
@@ -111,6 +122,7 @@ const Provider = ({children}) => {
       ],
     );
   };
+
   return (
     <MyContext.Provider
       value={{

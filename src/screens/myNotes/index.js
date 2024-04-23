@@ -1,4 +1,4 @@
-import {View, FlatList, Alert} from 'react-native';
+import {View, FlatList} from 'react-native';
 import React, {useContext} from 'react';
 import Header from '../../components/router/header';
 import {screenStyle} from '../../styles/screenStyles';
@@ -9,7 +9,7 @@ import {ADDNOTE} from '../../utils/routes';
 import MyContext from '../../context';
 
 const MyNotes = ({navigation}) => {
-  const {notes, setNotes, deleteNote, updateNote} = useContext(MyContext);
+  const {notes, deleteNote, updateNote} = useContext(MyContext);
 
   return (
     <SafeAreaView style={screenStyle.container}>

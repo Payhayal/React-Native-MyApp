@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Edit, Trash} from 'iconsax-react-native';
 import {NoteCardStyles} from '../../styles/noteCardStyles';
@@ -10,14 +10,23 @@ import MyContext from '../../context';
 const NoteCard = ({item, deleteItem, updateItem}) => {
   const {deleteNote} = useContext(MyContext);
   const navigation = useNavigation();
+
+  const [isRead, setIsRead] = useState(item.read);
+
+  // Stil belirleme fonksiyonu
+  const getBubbleStyle = () => {
+    return isRead ? NoteCardStyles.bubble : NoteCardStyles.bubbleRead;
+  };
+
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(NOTEDETAIL, {note: item})}
+      onPress={() => {
+        navigation.navigate(NOTEDETAIL, {note: item});
+        setIsRead(!isRead);
+      }}
       style={NoteCardStyles.container}>
       <View style={NoteCardStyles.bubbleContainer}>
-        <View
-          style={item.read ? NoteCardStyles.bubble : NoteCardStyles.bubbleRead}
-        />
+        <View style={getBubbleStyle()} />
       </View>
       <View style={NoteCardStyles.noteContainer}>
         <Text style={NoteCardStyles.title}>{item.title}</Text>
@@ -25,7 +34,7 @@ const NoteCard = ({item, deleteItem, updateItem}) => {
         <Text style={NoteCardStyles.date}>{item.date}</Text>
       </View>
       <TouchableOpacity
-        onPress={() => deleteNote(item.id)}
+        onPress={() => deleteNote(item.id, item)}
         style={NoteCardStyles.trashView}>
         <Trash size="24" variant="Bold" color={AppColors.RED} />
       </TouchableOpacity>
