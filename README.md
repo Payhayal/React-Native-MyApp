@@ -23,17 +23,17 @@ My Note App is a simple React Native application that allows users to manage not
 # Libraries Used
 
 ```
-### React Navigation:
+# React Navigation:
 - React Navigation is a widely-used library for managing navigation and routing in React Native apps.
 - It offers various navigation components like Stack, Tab, and Drawer Navigator for building navigation flows.
 - React Navigation is highly customizable and supports both iOS and Android platforms.
 
-### Iconsax-react-native:
+# Iconsax-react-native:
 - Iconsax-react-native is a library providing a collection of high-quality icons for React Native apps.
 - It simplifies the integration of icons into apps by offering a convenient way to use Iconsax icons as React Native components.
 - Iconsax offers a diverse range of icons covering different categories.
 
-### React Native AsyncStorage:
+# React Native AsyncStorage:
 - AsyncStorage is an API for storing key-value pairs asynchronously in React Native apps.
 - It's commonly used for persisting small amounts of data locally on the device, such as user preferences and settings.
 - AsyncStorage operates asynchronously, ensuring smooth app performance, but it's best suited for storing small data sets.
@@ -53,14 +53,6 @@ My Note App is a simple React Native application that allows users to manage not
 ![](./src/assets/images/3.png)
 
 ![](./src/assets/images/4.png)
-
-![](./src/assets/images/5.png)
-
-![](./src/assets/images/6.png)
-
-![](./src/assets/images/7.png)
-
-![](./src/assets/images/8.png)
 
 # Contributing
 
