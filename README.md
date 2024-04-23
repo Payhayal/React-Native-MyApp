@@ -42,7 +42,7 @@ My Note App is a simple React Native application that allows users to manage not
 
 # SCREEN GIF
 
-![](./src/assets/images/note.gif)
+![](./src/assets/images/myNote.gif)
 
 # SCREEN VIEW
 
