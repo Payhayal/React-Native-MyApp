@@ -1,79 +1,59 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# My Note App
 
-# Getting Started
+My Note App is a simple React Native application that allows users to manage notes. It provides functionalities for adding, updating, and deleting notes. The app utilizes React Navigation for navigation between screens, useEffect for handling the read/unread feature with color changes, and AsyncStorage for storing notes locally on the device.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+# Features
 
-## Step 1: Start the Metro Server
+- Navigation: React Navigation is used to facilitate smooth navigation between screens in the app.
+- Add and Update Notes: The app allows users to add new notes or update existing ones.
+- Read/Unread Functionality: Notes can be marked as read or unread, with corresponding color changes applied to indicate their status.
+- Local Data Storage: AsyncStorage is employed for storing notes locally on the device, ensuring data persistence across app sessions.
+- Dynamic Screen Usage: The same screen serves as both the "Add Note" and "Update Note" screens, with the header title changing based on the type of operation (add or update).
+- Alert Notifications: Alert buttons are incorporated into the app for actions such as saving, deleting, or updating notes. Users are provided with informative alerts to confirm their actions.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+# Usage
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- Upon launching the app, users are presented with a list of existing notes.
+- To add a new note, click on the "Add Note" button and fill in the details.
+- To update an existing note, click on the note from the list and make the necessary changes.
+- Notes can be marked as read or unread by tapping on them.
+- To delete a note, swipe left on the note and click on the delete button.
+- Alert buttons will provide confirmation for saving, updating, or deleting notes.
 
-```bash
-# using npm
-npm start
+# Libraries Used
 
-# OR using Yarn
-yarn start
+```
+# React Navigation:
+- React Navigation is a widely-used library for managing navigation and routing in React Native apps.
+- It offers various navigation components like Stack, Tab, and Drawer Navigator for building navigation flows.
+- React Navigation is highly customizable and supports both iOS and Android platforms.
+
+# Iconsax-react-native:
+- Iconsax-react-native is a library providing a collection of high-quality icons for React Native apps.
+- It simplifies the integration of icons into apps by offering a convenient way to use Iconsax icons as React Native components.
+- Iconsax offers a diverse range of icons covering different categories.
+
+# React Native AsyncStorage:
+- AsyncStorage is an API for storing key-value pairs asynchronously in React Native apps.
+- It's commonly used for persisting small amounts of data locally on the device, such as user preferences and settings.
+- AsyncStorage operates asynchronously, ensuring smooth app performance, but it's best suited for storing small data sets.
+
 ```
 
-## Step 2: Start your Application
+# SCREEN GIF
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+![](./src/assets/images/myNote.gif)
 
-### For Android
+# SCREEN VIEW
 
-```bash
-# using npm
-npm run android
+![](./src/assets/images/1.png)
 
-# OR using Yarn
-yarn android
-```
+![](./src/assets/images/2.png)
 
-### For iOS
+![](./src/assets/images/3.png)
 
-```bash
-# using npm
-npm run ios
+![](./src/assets/images/4.png)
 
-# OR using Yarn
-yarn ios
-```
+# Contributing
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Contributions are welcome! If you'd like to contribute to this project, feel free to fork the repository and submit a pull request with your changes.
